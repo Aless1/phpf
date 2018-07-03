@@ -23,17 +23,15 @@ class GameLogic implements \Framework\server\IServer
     }
 
     public function handleOne($controller, $action, $param) {
+        $class  = "\\Game\\controller\\" . $controller;
+        if (!class_exists($class)){
+            throw new Framework\Exception\LogicAlertException("class_not_found",array('class' => $class));
 
-        echo $controller . '__' . $action;
-        // $class  = "\\Game\\controller\\" . $controller;
-        // if (!class_exists($class)){
-        //     throw new Framework\Exception\LogicAlertException("class_not_found",array('class' => $class));
-
-        // }
-        // if (!method_exists($class, $action)) {
-        //     throw new Framework\Exception\LogicAlertException("method_not_exist", array('msg' =>'Oops! method $class::$action not exists'));
-        // }
-	    // $inst = new $class($param);
-	    // return $inst->run($action);
+        }
+        if (!method_exists($class, $action)) {
+            throw new Framework\Exception\LogicAlertException("method_not_exist", array('msg' =>'Oops! method $class::$action not exists'));
+        }
+        $inst = new $class($param);
+	    return $inst->run($action);
     }
 }

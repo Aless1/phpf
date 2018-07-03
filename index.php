@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ERROR);
 
 define('ROOT', __DIR__);
 define('APP_ROOT', ROOT.'/app');

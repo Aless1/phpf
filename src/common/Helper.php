@@ -7,7 +7,7 @@ function getParam($params, $key, $type = null, $require = true, $default = null)
 	    // 如果必须项
 	    if($require)
 	    {
-	        throw new Arsenal\Exception\LogicAlertException("param_not_exist", array('key' => $key,'params' => $params));
+	        throw new Framework\Exception\LogicAlertException("param_not_exist", array('key' => $key,'params' => $params));
 	    }
 
 	    if($default !== null)
@@ -21,7 +21,7 @@ function getParam($params, $key, $type = null, $require = true, $default = null)
 	    }
 	    else
 	    {
-	        throw new Arsenal\Exception\LogicAlertException("param_not_exist", array('key' => $key,'params' => $params));
+	        throw new Framework\Exception\LogicAlertException("param_not_exist", array('key' => $key,'params' => $params));
 	    }
 	}
 	$param = $params[$key];
@@ -40,25 +40,25 @@ function getParam($params, $key, $type = null, $require = true, $default = null)
 	        $param = json_decode(htmlspecialchars_decode($param),true);
 	        if (!is_array($param))
 	        {
-	            throw new Arsenal\Exception\LogicAlertException("invalid_param", array('key' => $key,'params' => $params));
+	            throw new Framework\Exception\LogicAlertException("invalid_param", array('key' => $key,'params' => $params));
 	        }
 	        break;
 	    case 'array':
 	        if (!is_array($param))
 	        {
-	            throw new Arsenal\Exception\LogicAlertException("invalid_param", array('key' => $key,'params' => $params));
+	            throw new Framework\Exception\LogicAlertException("invalid_param", array('key' => $key,'params' => $params));
 	        }
 	        break;
 	    case 'mobile':
 	        if($isCheck && preg_match('/^0?(13[0-9]|15[012356789]|18[0-9]|14[57]|17[0678])[0-9]{8}$/',$param)!==1)
 	        {
-	            throw new Arsenal\Exception\LogicAlertException("invalid_param");
+	            throw new Framework\Exception\LogicAlertException("invalid_param");
 	        }
 	        break;
 	    case 'password':
 	        if($isCheck && preg_match('/^\w{4,32}$/',$param)!==1)
 	        {
-	            throw new Arsenal\Exception\LogicAlertException("invalid_param");
+	            throw new Framework\Exception\LogicAlertException("invalid_param");
 	        }
 	        break;
 	}
